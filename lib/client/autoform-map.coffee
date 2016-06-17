@@ -15,22 +15,22 @@ AutoForm.addInputType 'map',
 		node = $(@context)
 
 		lat = node.find('.js-lat').val()
-		lng = node.find('.js-lng').val()
+		lon = node.find('.js-lng').val()
 
-		if lat?.length > 0 and lng?.length > 0
+		if lat?.length > 0 and lon?.length > 0
 			lat: lat
-			lng: lng
+			lon: lon
 	contextAdjust: (ctx) ->
 		ctx.loading = new ReactiveVar(false)
 		ctx
 	valueConverters:
 		string: (value) ->
 			if @attr('reverse')
-				"#{value.lng},#{value.lat}"
+				"#{value.lon},#{value.lat}"
 			else
-				"#{value.lat},#{value.lng}"
+				"#{value.lat},#{value.lon}"
 		numberArray: (value) ->
-			[value.lng, value.lat]
+			[value.lon, value.lat]
 
 Template.afMap.created = ->
 	@mapReady = new ReactiveVar false
@@ -40,7 +40,7 @@ Template.afMap.created = ->
 	@_interceptValue = (ctx) ->
 		t = Template.instance()
 		if t.mapReady.get() and ctx.value and not t._stopInterceptValue
-			location = if typeof ctx.value == 'string' then ctx.value.split ',' else if ctx.value.hasOwnProperty 'lat' then [ctx.value.lat, ctx.value.lng] else [ctx.value[1], ctx.value[0]]
+			location = if typeof ctx.value == 'string' then ctx.value.split ',' else if ctx.value.hasOwnProperty 'lat' then [ctx.value.lon, ctx.value.lat] else [ctx.value[1], ctx.value[0]]
 			location = new google.maps.LatLng parseFloat(location[0]), parseFloat(location[1])
 			t.setMarker t.map, location, t.options.zoom
 			t.map.setCenter location
@@ -52,7 +52,7 @@ initTemplateAndGoogleMaps = ->
 	@data.marker = undefined
 	@setMarker = (map, location, zoom=0) =>
 		@$('.js-lat').val(location.lat())
-		@$('.js-lng').val(location.lng())
+		@$('.js-lng').val(location.lon())
 
 		if @data.marker then @data.marker.setMap null
 		@data.marker = new google.maps.Marker
