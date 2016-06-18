@@ -52,7 +52,7 @@ initTemplateAndGoogleMaps = ->
 	@data.marker = undefined
 	@setMarker = (map, location, zoom=0) =>
 		@$('.js-lat').val(location.lat())
-		@$('.js-lng').val(location.lon())
+		@$('.js-lng').val(location.lng())
 
 		if @data.marker then @data.marker.setMap null
 		@data.marker = new google.maps.Marker
