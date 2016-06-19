@@ -40,7 +40,7 @@ Template.afMap.created = ->
 	@_interceptValue = (ctx) ->
 		t = Template.instance()
 		if t.mapReady.get() and ctx.value and not t._stopInterceptValue
-			location = if typeof ctx.value == 'string' then ctx.value.split ',' else if ctx.value.hasOwnProperty 'lat' then [ctx.value.lon, ctx.value.lat] else [ctx.value[1], ctx.value[0]]
+			location = if typeof ctx.value == 'string' then ctx.value.split ',' else if ctx.value.hasOwnProperty 'lat' then [ctx.value.lat, ctx.value.lon] else [ctx.value[1], ctx.value[0]]
 			location = new google.maps.LatLng parseFloat(location[0]), parseFloat(location[1])
 			t.setMarker t.map, location, t.options.zoom
 			t.map.setCenter location
