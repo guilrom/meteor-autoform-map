@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'guilrom:autoform-map',
+  name: 'guilrom:autoform-map2',
   summary: 'Edit location coordinates with autoForm',
   version: '0.2.0',
   git: 'https://github.com/guilrom/meteor-autoform-map'
