@@ -34,7 +34,7 @@ AutoForm.addInputType 'map',
 
 Template.afMap.created = ->
 	@mapReady = new ReactiveVar false
-	gkey = Meteor.settings.googleMaps.key
+	gkey = Meteor.settings.public.googleMaps.key
 	GoogleMaps.load(key: gkey, libraries: 'places')
 
 	@_stopInterceptValue = false
